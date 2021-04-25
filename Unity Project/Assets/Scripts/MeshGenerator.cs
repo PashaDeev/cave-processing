@@ -41,21 +41,21 @@ public class MeshGenerator : MonoBehaviour {
 		mesh.triangles = triangles.ToArray();
 		mesh.RecalculateNormals();
 
-		int tileAmount = 10;
-		Vector2[] uvs = new Vector2[vertices.Count];
-		for (int i =0; i < vertices.Count; i ++) {
-			float percentX = Mathf.InverseLerp(-map.GetLength(0)/2*squareSize,map.GetLength(0)/2*squareSize,vertices[i].x) * tileAmount;
-			float percentY = Mathf.InverseLerp(-map.GetLength(0)/2*squareSize,map.GetLength(0)/2*squareSize,vertices[i].z) * tileAmount;
-			uvs[i] = new Vector2(percentX,percentY);
-		}
-		mesh.uv = uvs;
-	
+		// int tileAmount = 10;
+		// Vector2[] uvs = new Vector2[vertices.Count];
+		// for (int i =0; i < vertices.Count; i ++) {
+		// 	float percentX = Mathf.InverseLerp(-map.GetLength(0)/2*squareSize,map.GetLength(0)/2*squareSize,vertices[i].x) * tileAmount;
+		// 	float percentY = Mathf.InverseLerp(-map.GetLength(0)/2*squareSize,map.GetLength(0)/2*squareSize,vertices[i].z) * tileAmount;
+		// 	uvs[i] = new Vector2(percentX,percentY);
+		// }
+		// mesh.uv = uvs;
 
-		if (is2D) {
-			Generate2DColliders();
-		} else {
-			CreateWallMesh ();
-		}
+
+		// if (is2D) {
+		// 	Generate2DColliders();
+		// } else {
+		// 	CreateWallMesh ();
+		// }
 	}
 
 	void CreateWallMesh() {
@@ -88,7 +88,7 @@ public class MeshGenerator : MonoBehaviour {
 			}
 		}
 		wallMesh.vertices = wallVertices.ToArray ();
-		wallMesh.triangles = wallTriangles.ToArray ();
+		// wallMesh.triangles = wallTriangles.ToArray ();
 		walls.mesh = wallMesh;
 
 		MeshCollider wallCollider = gameObject.AddComponent<MeshCollider> ();
@@ -104,15 +104,15 @@ public class MeshGenerator : MonoBehaviour {
 
 		CalculateMeshOutlines ();
 
-		foreach (List<int> outline in outlines) {
-			EdgeCollider2D edgeCollider = gameObject.AddComponent<EdgeCollider2D>();
-			Vector2[] edgePoints = new Vector2[outline.Count];
-
-			for (int i =0; i < outline.Count; i ++) {
-				edgePoints[i] = new Vector2(vertices[outline[i]].x,vertices[outline[i]].z);
-			}
-			edgeCollider.points = edgePoints;
-		}
+		// foreach (List<int> outline in outlines) {
+		// 	EdgeCollider2D edgeCollider = gameObject.AddComponent<EdgeCollider2D>();
+		// 	Vector2[] edgePoints = new Vector2[outline.Count];
+		//
+		// 	for (int i =0; i < outline.Count; i ++) {
+		// 		edgePoints[i] = new Vector2(vertices[outline[i]].x,vertices[outline[i]].z);
+		// 	}
+		// 	edgeCollider.points = edgePoints;
+		// }
 
 	}
 
@@ -122,52 +122,52 @@ public class MeshGenerator : MonoBehaviour {
 			break;
 
 		// 1 points:
-		case 1:
-			MeshFromPoints(square.centreLeft, square.centreBottom, square.bottomLeft);
-			break;
-		case 2:
-			MeshFromPoints(square.bottomRight, square.centreBottom, square.centreRight);
-			break;
-		case 4:
-			MeshFromPoints(square.topRight, square.centreRight, square.centreTop);
-			break;
-		case 8:
-			MeshFromPoints(square.topLeft, square.centreTop, square.centreLeft);
-			break;
-
-		// 2 points:
-		case 3:
-			MeshFromPoints(square.centreRight, square.bottomRight, square.bottomLeft, square.centreLeft);
-			break;
-		case 6:
-			MeshFromPoints(square.centreTop, square.topRight, square.bottomRight, square.centreBottom);
-			break;
-		case 9:
-			MeshFromPoints(square.topLeft, square.centreTop, square.centreBottom, square.bottomLeft);
-			break;
-		case 12:
-			MeshFromPoints(square.topLeft, square.topRight, square.centreRight, square.centreLeft);
-			break;
-		case 5:
-			MeshFromPoints(square.centreTop, square.topRight, square.centreRight, square.centreBottom, square.bottomLeft, square.centreLeft);
-			break;
-		case 10:
-			MeshFromPoints(square.topLeft, square.centreTop, square.centreRight, square.bottomRight, square.centreBottom, square.centreLeft);
-			break;
-
-		// 3 point:
-		case 7:
-			MeshFromPoints(square.centreTop, square.topRight, square.bottomRight, square.bottomLeft, square.centreLeft);
-			break;
-		case 11:
-			MeshFromPoints(square.topLeft, square.centreTop, square.centreRight, square.bottomRight, square.bottomLeft);
-			break;
-		case 13:
-			MeshFromPoints(square.topLeft, square.topRight, square.centreRight, square.centreBottom, square.bottomLeft);
-			break;
-		case 14:
-			MeshFromPoints(square.topLeft, square.topRight, square.bottomRight, square.centreBottom, square.centreLeft);
-			break;
+		// case 1:
+		// 	MeshFromPoints(square.centreLeft, square.centreBottom, square.bottomLeft);
+		// 	break;
+		// case 2:
+		// 	MeshFromPoints(square.bottomRight, square.centreBottom, square.centreRight);
+		// 	break;
+		// case 4:
+		// 	MeshFromPoints(square.topRight, square.centreRight, square.centreTop);
+		// 	break;
+		// case 8:
+		// 	MeshFromPoints(square.topLeft, square.centreTop, square.centreLeft);
+		// 	break;
+		//
+		// // 2 points:
+		// case 3:
+		// 	MeshFromPoints(square.centreRight, square.bottomRight, square.bottomLeft, square.centreLeft);
+		// 	break;
+		// case 6:
+		// 	MeshFromPoints(square.centreTop, square.topRight, square.bottomRight, square.centreBottom);
+		// 	break;
+		// case 9:
+		// 	MeshFromPoints(square.topLeft, square.centreTop, square.centreBottom, square.bottomLeft);
+		// 	break;
+		// case 12:
+		// 	MeshFromPoints(square.topLeft, square.topRight, square.centreRight, square.centreLeft);
+		// 	break;
+		// case 5:
+		// 	MeshFromPoints(square.centreTop, square.topRight, square.centreRight, square.centreBottom, square.bottomLeft, square.centreLeft);
+		// 	break;
+		// case 10:
+		// 	MeshFromPoints(square.topLeft, square.centreTop, square.centreRight, square.bottomRight, square.centreBottom, square.centreLeft);
+		// 	break;
+		//
+		// // 3 point:
+		// case 7:
+		// 	MeshFromPoints(square.centreTop, square.topRight, square.bottomRight, square.bottomLeft, square.centreLeft);
+		// 	break;
+		// case 11:
+		// 	MeshFromPoints(square.topLeft, square.centreTop, square.centreRight, square.bottomRight, square.bottomLeft);
+		// 	break;
+		// case 13:
+		// 	MeshFromPoints(square.topLeft, square.topRight, square.centreRight, square.centreBottom, square.bottomLeft);
+		// 	break;
+		// case 14:
+		// 	MeshFromPoints(square.topLeft, square.topRight, square.bottomRight, square.centreBottom, square.centreLeft);
+		// 	break;
 
 		// 4 point:
 		case 15:
@@ -188,7 +188,7 @@ public class MeshGenerator : MonoBehaviour {
 			CreateTriangle(points[0], points[1], points[2]);
 		if (points.Length >= 4)
 			CreateTriangle(points[0], points[2], points[3]);
-		if (points.Length >= 5) 
+		if (points.Length >= 5)
 			CreateTriangle(points[0], points[3], points[4]);
 		if (points.Length >= 6)
 			CreateTriangle(points[0], points[4], points[5]);
@@ -233,16 +233,16 @@ public class MeshGenerator : MonoBehaviour {
 				if (newOutlineVertex != -1) {
 					checkedVertices.Add(vertexIndex);
 
-					List<int> newOutline = new List<int>();
-					newOutline.Add(vertexIndex);
-					outlines.Add(newOutline);
-					FollowOutline(newOutlineVertex, outlines.Count-1);
-					outlines[outlines.Count-1].Add(vertexIndex);
+					// list<int> newoutline = new list<int>();
+					// newoutline.add(vertexindex);
+					// outlines.add(newoutline);
+					// followoutline(newoutlinevertex, outlines.count-1);
+					// outlines[outlines.count-1].add(vertexindex);
 				}
 			}
 		}
 
-		SimplifyMeshOutlines ();
+		// SimplifyMeshOutlines ();
 	}
 
 	void SimplifyMeshOutlines() {
@@ -362,7 +362,7 @@ public class MeshGenerator : MonoBehaviour {
 
 		}
 	}
-	
+
 	public class Square {
 
 		public ControlNode topLeft, topRight, bottomRight, bottomLeft;

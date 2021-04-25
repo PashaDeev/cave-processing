@@ -69,7 +69,7 @@ public class MapGenerator : MonoBehaviour {
 		List<List<Coord>> roomRegions = GetRegions (0);
 		int roomThresholdSize = 50;
 		List<Room> survivingRooms = new List<Room> ();
-		
+
 		foreach (List<Coord> roomRegion in roomRegions) {
 			if (roomRegion.Count < roomThresholdSize) {
 				foreach (Coord tile in roomRegion) {
@@ -124,7 +124,7 @@ public class MapGenerator : MonoBehaviour {
 				if (roomA == roomB || roomA.IsConnected(roomB)) {
 					continue;
 				}
-			
+
 				for (int tileIndexA = 0; tileIndexA < roomA.edgeTiles.Count; tileIndexA ++) {
 					for (int tileIndexB = 0; tileIndexB < roomB.edgeTiles.Count; tileIndexB ++) {
 						Coord tileA = roomA.edgeTiles[tileIndexA];
